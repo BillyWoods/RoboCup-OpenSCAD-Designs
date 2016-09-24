@@ -1,7 +1,7 @@
 include <Colours.scad>
 
 //
-//CODE FOR BOLTS	
+//CODE FOR BOLTS    
 //
 
 //define some standard bolt dimensions
@@ -19,28 +19,28 @@ function boltCorners(type) =       type[3];
 
 module Bolt(type, length, printToBOM = false)
 {
-	color(boltColour)
-	 union()
-	 {
-		 //hexagonal head shape (cylinder limited to 6 side segments)
-		 cylinder(r = boltCorners(type)/2, h = boltHeadThickness(type), $fn = 6);
-		 //the bolt shank
-		 translate([0,0,-length])
-		  cylinder(r = boltHoleDia(type)/2, h = length + 0.1);
-	 }
-	
-	//echoes properties to command line, etc. so it can be counted manually
-	//or by a program
-	if(printToBOM == true)
-	{
-		echo(boltName(type), "x", length);
-	}
+    color(boltColour)
+     union()
+     {
+         //hexagonal head shape (cylinder limited to 6 side segments)
+         cylinder(r = boltCorners(type)/2, h = boltHeadThickness(type), $fn = 6);
+         //the bolt shank
+         translate([0,0,-length])
+          cylinder(r = boltHoleDia(type)/2, h = length + 0.1);
+     }
+    
+    //echoes properties to command line, etc. so it can be counted manually
+    //or by a program
+    if(printToBOM == true)
+    {
+        echo(boltName(type), "x", length);
+    }
 }
 
 
 
 //
-//CODE FOR NUTS	
+//CODE FOR NUTS 
 //
 
 //define some standard nut dimensions
@@ -59,28 +59,28 @@ function nutFlats(type) =     type[4];
 
 module Nut(type, printToBOM = false, negShape = false)
 {
-	color(nutColour)
-	 difference()
-	 {
-	 	 //hexagonal shape (cylinder limited to 6 side segments)
-		 cylinder(r = nutCorners(type)/2, h = nutThickness(type), $fn = 6);
-		
-		 //allows for a nut to be generated which is useful for being a negative in other 
-		 //difference operations down the track
-		 if(negShape == false) 
-		 {
-			 //the hole through the centre
-			 translate([0,0,-0.05])
-			  cylinder(r = nutHoleDia(type)/2, h = nutThickness(type) + 0.1);
-		 }
-	 }
-	
-	//echoes properties to command line, etc. so it can be counted manually
-	//or by a program
-	if(printToBOM == true)
-	{
-		echo(nutName(type));
-	}
+    color(nutColour)
+     difference()
+     {
+         //hexagonal shape (cylinder limited to 6 side segments)
+         cylinder(r = nutCorners(type)/2, h = nutThickness(type), $fn = 6);
+        
+         //allows for a nut to be generated which is useful for being a negative in other 
+         //difference operations down the track
+         if(negShape == false) 
+         {
+             //the hole through the centre
+             translate([0,0,-0.05])
+              cylinder(r = nutHoleDia(type)/2, h = nutThickness(type) + 0.1);
+         }
+     }
+    
+    //echoes properties to command line, etc. so it can be counted manually
+    //or by a program
+    if(printToBOM == true)
+    {
+        echo(nutName(type));
+    }
 }
 
 
@@ -99,34 +99,34 @@ M6Washer = ["M6 washer", 6.5, 11.8, 1.6];
 
 //functions for quickly getting washer dimensions
 function washerName(type) =        type[0];
-function washerID(type) =     	   type[1];
-function washerOD(type) = 		   type[2];
+function washerID(type) =          type[1];
+function washerOD(type) =          type[2];
 function washerThickness(type) =   type[3];
 
 module Washer(type, printToBOM = false, negShape = false)
 {
-	color(washerColour)
-	 difference()
-	 {
-		 //main circle shape
-		 cylinder(r = washerOD(type)/2, h = washerThickness(type));
-		
-		 //allows for a washer to be generated which is useful for being a negative in other 
-	 	 //difference operations down the track
-		 if(negShape == false) 
-		 {
-			 //the hole through the centre
-			 translate([0,0,-0.05])
-			  cylinder(r = washerID(type)/2, h = washerThickness(type) + 0.1);
-		 }
-	 }
-	
-	//echoes properties to command line, etc. so it can be counted manually
-	//or by a program
-	if(printToBOM == true)
-	{
-		echo(washerName(type));
-	}
+    color(washerColour)
+     difference()
+     {
+         //main circle shape
+         cylinder(r = washerOD(type)/2, h = washerThickness(type));
+        
+         //allows for a washer to be generated which is useful for being a negative in other 
+         //difference operations down the track
+         if(negShape == false) 
+         {
+             //the hole through the centre
+             translate([0,0,-0.05])
+              cylinder(r = washerID(type)/2, h = washerThickness(type) + 0.1);
+         }
+     }
+    
+    //echoes properties to command line, etc. so it can be counted manually
+    //or by a program
+    if(printToBOM == true)
+    {
+        echo(washerName(type));
+    }
 }
 
 
@@ -149,13 +149,13 @@ function threadDia(type) =    type[1];
 
 module ThreadedRod(type, length, printToBOM = false)
 {
-	color(threadedRodColour)
-	 cylinder(r = threadDia(type)/2, h = length);
-	
-	//echoes properties to command line, etc. so it can be counted manually
-	//or by a program
-	if(printToBOM == true)
-	{
-		echo(threadName(type), "x", length);
-	}
+    color(threadedRodColour)
+     cylinder(r = threadDia(type)/2, h = length);
+    
+    //echoes properties to command line, etc. so it can be counted manually
+    //or by a program
+    if(printToBOM == true)
+    {
+        echo(threadName(type), "x", length);
+    }
 }

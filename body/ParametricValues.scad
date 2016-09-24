@@ -5,6 +5,7 @@ include <Fasteners.scad>
 include <Electronics.scad>
 include <IRSensorDimensions.scad>
 include <BatteryDimensions.scad>
+include <UltrasonicSensorDimensions.scad>
 
 //note that max dimensions of soccer robots is:
 // diameter of 220mm and height of 220mm
@@ -15,6 +16,11 @@ include <BatteryDimensions.scad>
 bodyRadius =       		105;
 motorIndent = 	   		35;
 wheelClearance =   		2;
+
+
+//
+//BALL FENDER
+//
 ballBiteRadius =   		100; //for the semi-circle section which holds the ball
 ballBiteIndent = 		30; //how far the bite goes into the bottom plate	   
 fenderThickness = 		2;
@@ -22,6 +28,24 @@ fenderDrop = 			3; //how far below the plate the fender goes
 fenderHeight = 			35; //how far above the plate the fender goes
 fenderSectorAngle = 	45; //degrees out of 360
 fenderWingAngle = 		10; //degrees from straight ahead
+// ball roller (part of fender)
+rollerRad         = 19.6/2;
+rollerLength      = 24;
+rollerShaftLen    = 32;
+rollerID          = 7;
+rollerProtrusion  = 11; //distance roller protrudes from surface of fender
+rollerVerticalPos = 21.18; // from bottom of bottom plate
+rollerToMotorAngle= 75; // 0 places motor directly above roller
+
+rollerMotorRad              = 10.5;
+rollerMotorShaftRad         = 1;
+rollerMotorShaftLen         = 8.2;
+rollerMotorBossRad          = 8;
+rollerMotorBossHeight       = 4;
+rollerMotorInnerBossRad     = 3;
+rollerMotorInnerBossHeight  = 2;
+rollerMotorLength           = 24; // not including shaft and bosses
+rollerMotorHolderLen        = 22;
 
 
 //
@@ -67,7 +91,13 @@ numIRSensor =		5;
 IRSensorBolt = 		M3Bolt;
 IRSensorRotate = 	-8; //offset of rotation 
 IRSensorDistEdge = 	5; //how far IR mount hole is from edge 
-IRSensor = 			5mmIR;
+IRSensor = 			TSOP348xx;//5mmIR;
+
+ultrasonicType =	HCSR04;
+ultrasonicBolt = 	M3Bolt;
+ultrasonicDistEdge= 23;
+ultrasonicHeight = 	14; //how high the bottom of the sensor is above the plate
+ultrasonicAngle =	-6;
 
 batteryType = 		HobbyKing5000mAh;
 batteryHolderBolt = M3Bolt;
@@ -83,20 +113,23 @@ cameraDistToEdge = 	10;
 //
 //MECHANICAL
 //
-motorDia =    		25;
-motorLength = 		52;
-motorShaftDia = 	4;
-motorShaftLength = 	12;
-motorHoleSpacing =  17;
+motorType =         "SQUARE"; // SQUARE shape for NEMA 17 stepper, CYLINDER otherwise
+motorDia =    		42.3; //25; // if SQUARE, this translates to width across flats
+motorLength = 		39;   //52;
+motorShaftDia = 	5;   //4;
+motorBossDia =      22;   // used only for square/stepper motor 
+motorShaftLength = 	24;   //12;
+motorHoleSpacing =  31;   //17; // assumes a symmetrical motor layout, 2 holes for CYLINDER type, 4 for SQUARE
 motorHoleType = 	M3Bolt;
 
 //motor mount stuff
 mountThickness = 	4;	//thickness used for pretty much all mounts
-facePlateThickness= 2.5;
+facePlateThickness= 3;  //2.5;
 mountHoleType = 	M3Bolt;
 mountBackOffset =   5; 	//distance the back mount is offset from flush with the back of motor
 motorOffset = 		0;        //The motor is usually held at mount tab level, this moves it further up or down
-mLength   = 		boltCorners(mountHoleType) * 2 + mountThickness; //the length of the section
+mLength   = 	    30; //boltCorners(mountHoleType) * 2 + mountThickness; //the length of the section
+mClearance =        0.4; //only used in square mount
 tabLength = 		boltCorners(mountHoleType) * 2;
 
 //
