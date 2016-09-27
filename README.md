@@ -1,5 +1,7 @@
 # RCJ_Soccer_Robot
 
+![Screenshot of the OpenSCAD model](https://cloud.githubusercontent.com/assets/11406259/18871414/a2ab036c-84f8-11e6-921a-404c86391c29.png)
+
 Author:
 	Billy Woods
 
